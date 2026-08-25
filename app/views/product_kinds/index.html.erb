@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Product kinds" %>
+
+<h1>Product kinds</h1>
+
+<div id="product_kinds">
+  <% @product_kinds.each do |product_kind| %>
+    <%= render product_kind %>
+    <p>
+      <%= link_to "Show this product kind", product_kind %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New product kind", new_product_kind_path %>
