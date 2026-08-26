@@ -24,5 +24,12 @@
 
   <body>
     <%= yield %>
+    <div>
+      <% if Current.user %>
+        <%= button_to "Logout", session_path, method: :delete %>
+      <% else %>
+        <%= button_to "Login", new_session_path %>
+      <%end%>
+    </div>
   </body>
 </html>
