@@ -33,12 +33,12 @@
 
   <div>
     <%= form.label :character_id, style: "display: block" %>
-    <%= form.text_field :character_id %>
+    <%= form.collection_select :character_id, Character.all, :id, :name, prompt: true %>
   </div>
 
   <div>
     <%= form.label :product_kind_id, style: "display: block" %>
-    <%= form.text_field :product_kind_id %>
+    <%= form.collection_select :product_kind_id, ProductKind.all, :id, :name, prompt: true %>
   </div>
 
   <div>
