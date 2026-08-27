@@ -2,14 +2,21 @@
 
 <% content_for :title, "Products" %>
 
-<h1>Products</h1>
+<h1 class="text-xl font-bold p-5 text-white">Products</h1>
 
-<div id="products">
+<div id="products" class="grid grid-cols-3 gap-4">
   <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
+    <div class="p-5 bg-slate-800">
+      <%= render product %>
+      <div class="flex justify-start">
+        <p class="bg-sky-700 rounded-lg text-stone-200 hover:bg-sky-600 w-fit mr-3">
+          <%= link_to "Show this product", product, class:"p-3" %>
+        </p>
+        <p class="bg-sky-700 rounded-lg text-stone-200 hover:bg-sky-600 w-fit">
+          <%= link_to "Edit this product", edit_product_path(product), class:"p-3" %>
+        </p>
+      </div>
+    </div>
   <% end %>
 </div>
 
