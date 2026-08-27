@@ -41,6 +41,14 @@
     <%= form.collection_select :product_kind_id, ProductKind.all, :id, :name, { prompt: true }, class: "bg-slate-700 text-stone-200 rounded-lg p-2 w-full" %>
   </div>
 
+  <div class="mb-4">
+    <%= form.label :images, "Images (optional)", class: "block mb-1" %>
+    <%= form.file_field :images, multiple: true, accept: "image/*", class: "bg-slate-700 text-stone-200 rounded-lg p-2 w-full" %>
+    <% if product.images.attached? %>
+      <p class="text-sm text-stone-400 mt-1"><%= pluralize(product.images.count, "image") %> already attached.</p>
+    <% end %>
+  </div>
+
   <div>
     <%= form.submit class: "bg-sky-700 rounded-lg text-stone-200 hover:bg-sky-600 w-fit p-3 cursor-pointer" %>
   </div>

@@ -1,4 +1,8 @@
 <div id="<%= dom_id product %>" class="text-stone-200 pb-2">
+  <% if product.images.attached? %>
+    <%= image_tag product.images.first, class: "max-w-full h-auto rounded-lg mb-3" %>
+  <% end %>
+
   <p>
     <strong>Stock:</strong>
     <%= product.stock %>
