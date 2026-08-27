@@ -1,9 +1,9 @@
-<%= form_with(model: size) do |form| %>
+<%= form_with(model: size, class: "text-stone-200") do |form| %>
   <% if size.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(size.errors.count, "error") %> prohibited this size from being saved:</h2>
+    <div class="bg-red-900 text-stone-200 rounded-lg p-4 mb-4">
+      <h2 class="font-bold"><%= pluralize(size.errors.count, "error") %> prohibited this size from being saved:</h2>
 
-      <ul>
+      <ul class="list-disc list-inside">
         <% size.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,12 +11,12 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :size, style: "display: block" %>
-    <%= form.number_field :size %>
+  <div class="mb-4">
+    <%= form.label :size, class: "block mb-1" %>
+    <%= form.number_field :size, class: "bg-slate-700 text-stone-200 rounded-lg p-2 w-full" %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class: "bg-sky-700 rounded-lg text-stone-200 hover:bg-sky-600 w-fit p-3 cursor-pointer" %>
   </div>
 <% end %>

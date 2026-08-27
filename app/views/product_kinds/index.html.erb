@@ -2,15 +2,24 @@
 
 <% content_for :title, "Product kinds" %>
 
-<h1>Product kinds</h1>
+<h1 class="text-xl font-bold p-5 text-white">Product kinds</h1>
 
-<div id="product_kinds">
+<div id="product_kinds" class="grid grid-cols-3 gap-4">
   <% @product_kinds.each do |product_kind| %>
-    <%= render product_kind %>
-    <p>
-      <%= link_to "Show this product kind", product_kind %>
-    </p>
+    <div class="p-5 bg-slate-800">
+      <%= render product_kind %>
+      <div class="flex justify-start">
+        <p class="bg-sky-700 rounded-lg text-stone-200 hover:bg-sky-600 w-fit mr-3">
+          <%= link_to "Show this product kind", product_kind, class: "p-3 block" %>
+        </p>
+        <p class="bg-sky-700 rounded-lg text-stone-200 hover:bg-sky-600 w-fit">
+          <%= link_to "Edit this product kind", edit_product_kind_path(product_kind), class: "p-3 block" %>
+        </p>
+      </div>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New product kind", new_product_kind_path %>
+<p class="bg-sky-700 rounded-lg text-stone-200 hover:bg-sky-600 w-fit mt-4">
+  <%= link_to "New product kind", new_product_kind_path, class: "p-3 block" %>
+</p>

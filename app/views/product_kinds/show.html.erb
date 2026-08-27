@@ -1,10 +1,19 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @product_kind %>
+<% content_for :title, "Product kind" %>
 
-<div>
-  <%= link_to "Edit this product kind", edit_product_kind_path(@product_kind) %> |
-  <%= link_to "Back to product kinds", product_kinds_path %>
+<h1 class="text-xl font-bold p-5 text-white">Product kind</h1>
 
-  <%= button_to "Destroy this product kind", @product_kind, method: :delete %>
+<div class="p-5 bg-slate-800 w-fit">
+  <%= render @product_kind %>
+
+  <div class="flex justify-start items-center">
+    <p class="bg-sky-700 rounded-lg text-stone-200 hover:bg-sky-600 w-fit mr-3">
+      <%= link_to "Edit this product kind", edit_product_kind_path(@product_kind), class: "p-3 block" %>
+    </p>
+    <p class="bg-sky-700 rounded-lg text-stone-200 hover:bg-sky-600 w-fit mr-3">
+      <%= link_to "Back to product kinds", product_kinds_path, class: "p-3 block" %>
+    </p>
+    <%= button_to "Destroy this product kind", @product_kind, method: :delete, class: "bg-red-700 rounded-lg text-stone-200 hover:bg-red-600 w-fit p-3" %>
+  </div>
 </div>

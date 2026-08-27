@@ -1,11 +1,13 @@
 <% content_for :title, "New character" %>
 
-<h1>New character</h1>
+<h1 class="text-xl font-bold p-5 text-white">New character</h1>
 
-<%= render "form", character: @character %>
+<div class="p-5 bg-slate-800 w-fit">
+  <%= render "form", character: @character %>
 
-<br>
-
-<div>
-  <%= link_to "Back to characters", characters_path %>
+  <div class="flex justify-start mt-4">
+    <p class="bg-sky-700 rounded-lg text-stone-200 hover:bg-sky-600 w-fit">
+      <%= link_to "Back to characters", characters_path, class: "p-3 block" %>
+    </p>
+  </div>
 </div>
