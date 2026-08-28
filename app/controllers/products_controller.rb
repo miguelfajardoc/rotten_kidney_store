@@ -25,6 +25,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
+        attach_new_images
         format.html { redirect_to @product, notice: "Product was successfully created." }
         format.json { render :show, status: :created, location: @product }
       else
@@ -38,6 +39,8 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
+        attach_new_images
+        remove_selected_images
         format.html { redirect_to @product, notice: "Product was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @product }
       else
@@ -63,8 +66,22 @@ class ProductsController < ApplicationController
       @product = Product.find(params.expect(:id))
     end
 
+    # Append newly uploaded images without replacing the existing ones.
+    # In Rails 8 assigning to a has_many_attached always replaces, so images
+    # are attached explicitly here instead of going through mass assignment.
+    def attach_new_images
+      files = Array(params.dig(:product, :images)).reject(&:blank?)
+      @product.images.attach(files) if files.any?
+    end
+
+    # Purge attachments the user checked "Remove" on in the edit form.
+    def remove_selected_images
+      ids = Array(params[:remove_image_ids]).reject(&:blank?)
+      @product.images_attachments.where(id: ids).find_each(&:purge_later) if ids.any?
+    end
+
     # Only allow a list of trusted parameters through.
     def product_params
-      params.expect(product: [ :stock, :price, :cost, :aditional_info, :character_id, :product_kind_id, images: [] ])
+      params.expect(product: [ :stock, :price, :cost, :aditional_info, :character_id, :product_kind_id ])
     end
 end

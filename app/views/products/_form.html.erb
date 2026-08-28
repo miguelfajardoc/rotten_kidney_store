@@ -41,12 +41,27 @@
     <%= form.collection_select :product_kind_id, ProductKind.all, :id, :name, { prompt: true }, class: "bg-slate-700 text-stone-200 rounded-lg p-2 w-full" %>
   </div>
 
+  <% if product.images.attached? %>
+    <div class="mb-4">
+      <span class="block mb-1">Current images</span>
+      <div class="grid grid-cols-3 gap-3">
+        <% product.images.each do |image| %>
+          <label class="group relative block cursor-pointer">
+            <%= image_tag image, class: "w-full h-32 object-cover rounded-lg border border-slate-700" %>
+            <span class="absolute inset-0 rounded-lg bg-black/0 transition-colors group-has-[:checked]:bg-black/60"></span>
+            <span class="absolute bottom-2 left-2 flex items-center gap-1.5 rounded-lg bg-slate-900/80 px-2 py-1 text-sm text-stone-200">
+              <%= check_box_tag "remove_image_ids[]", image.id, false, class: "accent-red-600" %>
+              Remove
+            </span>
+          </label>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
   <div class="mb-4">
-    <%= form.label :images, "Images (optional)", class: "block mb-1" %>
+    <%= form.label :images, "Add images (optional)", class: "block mb-1" %>
     <%= form.file_field :images, multiple: true, accept: "image/*", class: "bg-slate-700 text-stone-200 rounded-lg p-2 w-full" %>
-    <% if product.images.attached? %>
-      <p class="text-sm text-stone-400 mt-1"><%= pluralize(product.images.count, "image") %> already attached.</p>
-    <% end %>
   </div>
 
   <div>
