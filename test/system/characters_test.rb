@@ -6,12 +6,12 @@ class CharactersTest < ApplicationSystemTestCase
   end
 
   test "visiting the index" do
-    visit characters_url
+    visit admin_characters_url
     assert_selector "h1", text: "Characters"
   end
 
   test "should create character" do
-    visit characters_url
+    visit admin_characters_url
     click_on "New character"
 
     fill_in "Klass", with: @character.klass
@@ -23,7 +23,7 @@ class CharactersTest < ApplicationSystemTestCase
   end
 
   test "should update Character" do
-    visit character_url(@character)
+    visit admin_character_url(@character)
     click_on "Edit this character", match: :first
 
     fill_in "Klass", with: @character.klass
@@ -35,7 +35,7 @@ class CharactersTest < ApplicationSystemTestCase
   end
 
   test "should destroy Character" do
-    visit character_url(@character)
+    visit admin_character_url(@character)
     click_on "Destroy this character", match: :first
 
     assert_text "Character was successfully destroyed"

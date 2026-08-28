@@ -6,12 +6,12 @@ class ProductKindsTest < ApplicationSystemTestCase
   end
 
   test "visiting the index" do
-    visit product_kinds_url
+    visit admin_product_kinds_url
     assert_selector "h1", text: "Product kinds"
   end
 
   test "should create product kind" do
-    visit product_kinds_url
+    visit admin_product_kinds_url
     click_on "New product kind"
 
     fill_in "Description", with: @product_kind.description
@@ -24,7 +24,7 @@ class ProductKindsTest < ApplicationSystemTestCase
   end
 
   test "should update Product kind" do
-    visit product_kind_url(@product_kind)
+    visit admin_product_kind_url(@product_kind)
     click_on "Edit this product kind", match: :first
 
     fill_in "Description", with: @product_kind.description
@@ -37,7 +37,7 @@ class ProductKindsTest < ApplicationSystemTestCase
   end
 
   test "should destroy Product kind" do
-    visit product_kind_url(@product_kind)
+    visit admin_product_kind_url(@product_kind)
     click_on "Destroy this product kind", match: :first
 
     assert_text "Product kind was successfully destroyed"

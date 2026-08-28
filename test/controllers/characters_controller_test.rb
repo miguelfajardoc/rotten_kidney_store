@@ -6,43 +6,43 @@ class CharactersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get characters_url
+    get admin_characters_url
     assert_response :success
   end
 
   test "should get new" do
-    get new_character_url
+    get new_admin_character_url
     assert_response :success
   end
 
   test "should create character" do
     assert_difference("Character.count") do
-      post characters_url, params: { character: { klass: @character.klass, name: @character.name } }
+      post admin_characters_url, params: { character: { klass: @character.klass, name: @character.name } }
     end
 
-    assert_redirected_to character_url(Character.last)
+    assert_redirected_to admin_character_url(Character.last)
   end
 
   test "should show character" do
-    get character_url(@character)
+    get admin_character_url(@character)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_character_url(@character)
+    get edit_admin_character_url(@character)
     assert_response :success
   end
 
   test "should update character" do
-    patch character_url(@character), params: { character: { klass: @character.klass, name: @character.name } }
-    assert_redirected_to character_url(@character)
+    patch admin_character_url(@character), params: { character: { klass: @character.klass, name: @character.name } }
+    assert_redirected_to admin_character_url(@character)
   end
 
   test "should destroy character" do
     assert_difference("Character.count", -1) do
-      delete character_url(@character)
+      delete admin_character_url(@character)
     end
 
-    assert_redirected_to characters_url
+    assert_redirected_to admin_characters_url
   end
 end

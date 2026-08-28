@@ -6,12 +6,12 @@ class ProductsTest < ApplicationSystemTestCase
   end
 
   test "visiting the index" do
-    visit products_url
+    visit admin_products_url
     assert_selector "h1", text: "Products"
   end
 
   test "should create product" do
-    visit products_url
+    visit admin_products_url
     click_on "New product"
 
     fill_in "Aditional info", with: @product.aditional_info
@@ -27,7 +27,7 @@ class ProductsTest < ApplicationSystemTestCase
   end
 
   test "should update Product" do
-    visit product_url(@product)
+    visit admin_product_url(@product)
     click_on "Edit this product", match: :first
 
     fill_in "Aditional info", with: @product.aditional_info
@@ -43,7 +43,7 @@ class ProductsTest < ApplicationSystemTestCase
   end
 
   test "should destroy Product" do
-    visit product_url(@product)
+    visit admin_product_url(@product)
     click_on "Destroy this product", match: :first
 
     assert_text "Product was successfully destroyed"

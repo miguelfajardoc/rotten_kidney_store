@@ -1,9 +1,9 @@
 <%
   nav_links = [
-    ["Products",      products_path],
-    ["Characters",    characters_path],
-    ["Product kinds", product_kinds_path],
-    ["Sizes",         sizes_path]
+    ["Products",      admin_products_path],
+    ["Characters",    admin_characters_path],
+    ["Product kinds", admin_product_kinds_path],
+    ["Sizes",         admin_sizes_path]
   ]
   base_link  = "px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-150"
   active_cls = "#{base_link} bg-sky-700 text-white shadow-inner"
@@ -12,7 +12,7 @@
 
 <nav class="sticky top-0 z-40 mb-8 rounded-2xl border border-slate-700/80 bg-slate-800/95 shadow-lg backdrop-blur supports-[backdrop-filter]:bg-slate-800/80">
   <div class="flex flex-wrap items-center gap-x-6 gap-y-3 px-5 py-3">
-    <%= link_to root_path, class: "flex items-center gap-2 text-white font-bold tracking-tight" do %>
+    <%= link_to admin_products_path, class: "flex items-center gap-2 text-white font-bold tracking-tight" do %>
       <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-sky-700 text-base">🫘</span>
       <span class="text-lg">Rotten Kidney</span>
     <% end %>

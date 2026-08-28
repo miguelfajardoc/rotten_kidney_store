@@ -6,43 +6,43 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get products_url
+    get admin_products_url
     assert_response :success
   end
 
   test "should get new" do
-    get new_product_url
+    get new_admin_product_url
     assert_response :success
   end
 
   test "should create product" do
     assert_difference("Product.count") do
-      post products_url, params: { product: { aditional_info: @product.aditional_info, character_id: @product.character_id, cost: @product.cost, price: @product.price, product_kind_id: @product.product_kind_id, stock: @product.stock } }
+      post admin_products_url, params: { product: { aditional_info: @product.aditional_info, character_id: @product.character_id, cost: @product.cost, price: @product.price, product_kind_id: @product.product_kind_id, stock: @product.stock } }
     end
 
-    assert_redirected_to product_url(Product.last)
+    assert_redirected_to admin_product_url(Product.last)
   end
 
   test "should show product" do
-    get product_url(@product)
+    get admin_product_url(@product)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_product_url(@product)
+    get edit_admin_product_url(@product)
     assert_response :success
   end
 
   test "should update product" do
-    patch product_url(@product), params: { product: { aditional_info: @product.aditional_info, character_id: @product.character_id, cost: @product.cost, price: @product.price, product_kind_id: @product.product_kind_id, stock: @product.stock } }
-    assert_redirected_to product_url(@product)
+    patch admin_product_url(@product), params: { product: { aditional_info: @product.aditional_info, character_id: @product.character_id, cost: @product.cost, price: @product.price, product_kind_id: @product.product_kind_id, stock: @product.stock } }
+    assert_redirected_to admin_product_url(@product)
   end
 
   test "should destroy product" do
     assert_difference("Product.count", -1) do
-      delete product_url(@product)
+      delete admin_product_url(@product)
     end
 
-    assert_redirected_to products_url
+    assert_redirected_to admin_products_url
   end
 end

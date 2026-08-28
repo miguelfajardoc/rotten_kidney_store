@@ -1,0 +1,27 @@
+<%= form_with(model: [ :admin, character ], class: "text-stone-200") do |form| %>
+  <% if character.errors.any? %>
+    <div class="bg-red-900 text-stone-200 rounded-lg p-4 mb-4">
+      <h2 class="font-bold"><%= pluralize(character.errors.count, "error") %> prohibited this character from being saved:</h2>
+
+      <ul class="list-disc list-inside">
+        <% character.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-4">
+    <%= form.label :name, class: "block mb-1" %>
+    <%= form.text_field :name, class: "bg-slate-700 text-stone-200 rounded-lg p-2 w-full" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :klass, class: "block mb-1" %>
+    <%= form.text_field :klass, class: "bg-slate-700 text-stone-200 rounded-lg p-2 w-full" %>
+  </div>
+
+  <div>
+    <%= form.submit class: "bg-sky-700 rounded-lg text-stone-200 hover:bg-sky-600 w-fit p-3 cursor-pointer" %>
+  </div>
+<% end %>

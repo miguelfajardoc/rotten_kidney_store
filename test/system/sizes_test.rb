@@ -6,12 +6,12 @@ class SizesTest < ApplicationSystemTestCase
   end
 
   test "visiting the index" do
-    visit sizes_url
+    visit admin_sizes_url
     assert_selector "h1", text: "Sizes"
   end
 
   test "should create size" do
-    visit sizes_url
+    visit admin_sizes_url
     click_on "New size"
 
     fill_in "Size", with: @size.size
@@ -22,7 +22,7 @@ class SizesTest < ApplicationSystemTestCase
   end
 
   test "should update Size" do
-    visit size_url(@size)
+    visit admin_size_url(@size)
     click_on "Edit this size", match: :first
 
     fill_in "Size", with: @size.size
@@ -33,7 +33,7 @@ class SizesTest < ApplicationSystemTestCase
   end
 
   test "should destroy Size" do
-    visit size_url(@size)
+    visit admin_size_url(@size)
     click_on "Destroy this size", match: :first
 
     assert_text "Size was successfully destroyed"
