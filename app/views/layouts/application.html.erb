@@ -22,14 +22,10 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="p-10 bg-slate-900">
-    <%= yield %>
-    <div>
-      <% if Current.user %>
-        <%= button_to "Logout", session_path, method: :delete %>
-      <% else %>
-        <%= button_to "Login", new_session_path %>
-      <%end%>
+  <body class="p-10 bg-slate-900 min-h-screen">
+    <div class="mx-auto max-w-6xl">
+      <%= render "layouts/navbar" %>
+      <%= yield %>
     </div>
   </body>
 </html>
