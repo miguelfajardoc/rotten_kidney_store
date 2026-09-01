@@ -15,7 +15,7 @@
   <% if @products.any? %>
     <div class="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-3">
       <% @products.each do |product| %>
-        <%= link_to shop_product_path(product), class: "group block" do %>
+        <%= link_to shop_product_path(product), data: { turbo_frame: "_top" }, class: "group block" do %>
           <div class="relative aspect-square overflow-hidden rounded-lg bg-slate-800">
             <% if product.images.attached? %>
               <%= image_tag product.images.first,
