@@ -1,40 +1,48 @@
 <% content_for :title, "Tienda" %>
 
-<div class="mb-10">
-  <h1 class="text-3xl font-bold tracking-tight text-white">Tienda</h1>
-  <p class="mt-2 text-sm uppercase tracking-widest text-stone-400"><%= pluralize(@products.size, "piece") %></p>
-</div>
-
-<% if @products.any? %>
-  <div class="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-3">
-    <% @products.each do |product| %>
-      <%= link_to shop_product_path(product), class: "group block" do %>
-        <div class="relative aspect-square overflow-hidden rounded-lg bg-slate-800">
-          <% if product.images.attached? %>
-            <%= image_tag product.images.first,
-                  class: "absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105 #{'group-hover:opacity-0' if product.images.size > 1}" %>
-            <% if product.images.size > 1 %>
-              <%= image_tag product.images.second,
-                    class: "absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" %>
-            <% end %>
-          <% else %>
-            <div class="flex h-full w-full items-center justify-center text-stone-600">No image</div>
-          <% end %>
-
-          <span class="absolute bottom-3 left-3 rounded bg-slate-900/80 px-2 py-1 text-[11px] font-semibold uppercase tracking-widest text-stone-200">
-            <%= product.sold_out? ? "Sold out" : "View listing" %>
-          </span>
-        </div>
-
-        <h2 class="mt-4 text-sm font-medium uppercase tracking-widest text-stone-200 transition-colors group-hover:text-white">
-          <%= product.title %>
-        </h2>
-        <p class="mt-1 text-sm text-stone-400">
-          <%= number_to_currency(product.price) %> COP
-        </p>
-      <% end %>
+<%= turbo_frame_tag "products" do %>
+  <p class="mb-10 text-sm uppercase tracking-widest text-stone-400">
+    <%= pluralize(@products.size, "piece") %>
+    <% if @active_product_kind || @active_character %>
+      <span class="text-stone-500">·</span>
+      <%= [ @active_product_kind&.name, @active_character&.name ].compact.join(" · ") %>
+      <%= link_to "limpiar", shop_products_path,
+            data: { turbo_frame: "products", turbo_action: "advance" },
+            class: "ms-2 text-stone-400 underline transition-colors hover:text-white" %>
     <% end %>
-  </div>
-<% else %>
-  <p class="text-stone-400">No products yet.</p>
+  </p>
+
+  <% if @products.any? %>
+    <div class="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-3">
+      <% @products.each do |product| %>
+        <%= link_to shop_product_path(product), class: "group block" do %>
+          <div class="relative aspect-square overflow-hidden rounded-lg bg-slate-800">
+            <% if product.images.attached? %>
+              <%= image_tag product.images.first,
+                    class: "absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105 #{'group-hover:opacity-0' if product.images.size > 1}" %>
+              <% if product.images.size > 1 %>
+                <%= image_tag product.images.second,
+                      class: "absolute inset-0 h-full w-full object-cover opacity-0 transition duration-500 group-hover:opacity-100" %>
+              <% end %>
+            <% else %>
+              <div class="flex h-full w-full items-center justify-center text-stone-600">No image</div>
+            <% end %>
+
+            <span class="absolute bottom-3 left-3 rounded bg-slate-900/80 px-2 py-1 text-[11px] font-semibold uppercase tracking-widest text-stone-200">
+              <%= product.sold_out? ? "Sold out" : "View listing" %>
+            </span>
+          </div>
+
+          <h2 class="mt-4 text-sm font-medium uppercase tracking-widest text-stone-200 transition-colors group-hover:text-white">
+            <%= product.title %>
+          </h2>
+          <p class="mt-1 text-sm text-stone-400">
+            <%= number_to_currency(product.price) %> COP
+          </p>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-stone-400">No products yet.</p>
+  <% end %>
 <% end %>

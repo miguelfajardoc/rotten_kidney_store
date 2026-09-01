@@ -1,0 +1,21 @@
+<%# locals: label:, param:, records:, active_id: %>
+<% target_frame = (controller_path == "shop/products" && action_name == "index") ? "products" : "_top" %>
+<details class="group relative" data-controller="dropdown">
+  <summary class="flex cursor-pointer list-none items-center gap-1 transition-colors hover:text-white [&::-webkit-details-marker]:hidden">
+    <%= label %>
+    <span class="text-[10px] transition-transform group-open:rotate-180">&#9662;</span>
+  </summary>
+
+  <div class="absolute left-0 z-20 mt-3 max-h-80 w-56 overflow-y-auto rounded-lg border border-slate-800 bg-slate-900 py-2 shadow-xl">
+    <%= link_to "Ver todo", shop_products_path,
+          data: { turbo_frame: target_frame, turbo_action: "advance", action: "click->dropdown#select" },
+          class: "block px-4 py-2 text-xs normal-case tracking-normal transition-colors hover:bg-slate-800 hover:text-white #{active_id.present? ? 'text-stone-400' : 'bg-slate-800 text-white'}" %>
+
+    <% records.each do |record| %>
+      <% selected = active_id.to_s == record.id.to_s %>
+      <%= link_to record.name, shop_products_path(param => record.id),
+            data: { turbo_frame: target_frame, turbo_action: "advance", action: "click->dropdown#select" },
+            class: "block px-4 py-2 text-xs normal-case tracking-normal transition-colors hover:bg-slate-800 hover:text-white #{'bg-slate-800 text-white' if selected} #{'text-stone-300' unless selected}" %>
+    <% end %>
+  </div>
+</details>

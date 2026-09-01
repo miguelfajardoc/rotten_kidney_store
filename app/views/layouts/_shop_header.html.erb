@@ -2,6 +2,18 @@
   <div class="mx-auto flex max-w-6xl items-center gap-8 px-6 py-5">
     <nav class="flex items-center gap-6 text-sm font-medium uppercase tracking-widest text-stone-300">
       <%= link_to "Tienda", shop_root_path, class: "transition-colors hover:text-white" %>
+
+      <%= render "layouts/shop_filter_dropdown",
+            label: "Productos",
+            param: :product_kind_id,
+            records: @shop_product_kinds,
+            active_id: params[:product_kind_id] %>
+
+      <%= render "layouts/shop_filter_dropdown",
+            label: "Personajes",
+            param: :character_id,
+            records: @shop_characters,
+            active_id: params[:character_id] %>
     </nav>
 
     <%= link_to shop_root_path, class: "ms-auto flex items-center gap-2 text-white" do %>
