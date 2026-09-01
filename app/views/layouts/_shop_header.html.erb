@@ -1,0 +1,12 @@
+<header class="border-b border-slate-800">
+  <div class="mx-auto flex max-w-6xl items-center gap-8 px-6 py-5">
+    <nav class="flex items-center gap-6 text-sm font-medium uppercase tracking-widest text-stone-300">
+      <%= link_to "Tienda", shop_root_path, class: "transition-colors hover:text-white" %>
+    </nav>
+
+    <%= link_to shop_root_path, class: "ms-auto flex items-center gap-2 text-white" do %>
+      <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-sky-700 text-base">🫘</span>
+      <span class="text-lg font-bold tracking-tight">Rotten Kidney</span>
+    <% end %>
+  </div>
+</header>

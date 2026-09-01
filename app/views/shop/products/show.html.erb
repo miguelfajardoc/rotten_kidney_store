@@ -1,0 +1,56 @@
+<% content_for :title, @product.title %>
+
+<%= link_to "← Back to Tienda", shop_root_path, class: "mb-8 inline-block text-xs font-medium uppercase tracking-widest text-stone-400 transition-colors hover:text-white" %>
+
+<div class="grid gap-10 lg:grid-cols-2">
+  <div data-controller="gallery">
+    <div class="aspect-square overflow-hidden rounded-lg bg-slate-800">
+      <% if @product.images.attached? %>
+        <%= image_tag @product.images.first, data: { gallery_target: "main" },
+              class: "h-full w-full object-cover" %>
+      <% else %>
+        <div class="flex h-full w-full items-center justify-center text-stone-600">No image</div>
+      <% end %>
+    </div>
+
+    <% if @product.images.size > 1 %>
+      <div class="mt-4 grid grid-cols-5 gap-3">
+        <% @product.images.each do |image| %>
+          <button type="button"
+                  data-gallery-target="thumb"
+                  data-action="gallery#select"
+                  data-gallery-full-url="<%= url_for(image) %>"
+                  class="aspect-square overflow-hidden rounded-md bg-slate-800 ring-sky-500 ring-offset-2 ring-offset-slate-900 transition hover:opacity-80">
+            <%= image_tag image, class: "h-full w-full object-cover" %>
+          </button>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <h1 class="text-3xl font-bold tracking-tight text-white"><%= @product.title %></h1>
+    <p class="mt-3 text-xl text-stone-300"><%= number_to_currency(@product.price) %> COP</p>
+
+    <div class="mt-6 w-full rounded-lg border border-slate-700 py-3 text-center text-sm font-semibold uppercase tracking-widest
+                <%= @product.sold_out? ? 'text-stone-500' : 'bg-sky-700 text-white' %>">
+      <%= @product.sold_out? ? "Sold out" : "Available" %>
+    </div>
+
+    <dl class="mt-10 space-y-4 border-t border-slate-800 pt-8 text-sm">
+      <% [
+           ["Product kind", @product.product_kind&.name],
+           ["Character",    @product.character&.name],
+           ["Material",     @product.product_kind&.material],
+           ["Description",  @product.product_kind&.description],
+           ["Notes",        @product.aditional_info]
+         ].each do |label, value| %>
+        <% next if value.blank? %>
+        <div class="flex gap-4">
+          <dt class="w-32 shrink-0 uppercase tracking-widest text-stone-500"><%= label %></dt>
+          <dd class="text-stone-300"><%= value %></dd>
+        </div>
+      <% end %>
+    </dl>
+  </div>
+</div>
