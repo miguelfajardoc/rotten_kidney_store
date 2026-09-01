@@ -1,0 +1,17 @@
+# Business-wide settings. Access via `Rails.application.config.business`,
+# e.g. `Rails.application.config.business.whatsapp_phone`.
+#
+# The WhatsApp number must be in full international format, digits only:
+# no "+", spaces or dashes. Colombia = 57 + the 10-digit number.
+default: &default
+  whatsapp_phone: "573125809186"
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
+  whatsapp_phone: <%= ENV.fetch("WHATSAPP_PHONE", "573125809186") %>

@@ -1,0 +1,10 @@
+es:
+  hello: "Hola mundo"
+
+  shop:
+    products:
+      show:
+        buy: "Comprar"
+        sold_out: "Agotado"
+        # Mensaje precargado de WhatsApp. Variables disponibles: %{title}, %{price}, %{url}
+        whatsapp_message: "Hola, estoy interesado en \"%{title}\" (%{price} COP). ¿Sigue disponible? %{url}"

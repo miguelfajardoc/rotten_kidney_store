@@ -23,5 +23,12 @@ module RottenKidney
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Spanish is the primary language; English strings are kept for the future.
+    config.i18n.default_locale = :es
+    config.i18n.available_locales = [ :es, :en ]
+
+    # Business-wide settings, editable in config/business.yml.
+    config.business = config_for(:business)
   end
 end
